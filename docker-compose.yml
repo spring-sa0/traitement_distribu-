@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  master:
+    image: hadoop-spark-cluster
+    hostname: master
+    command: ["/scripts/start-master.sh"]
+    ports:
+      - "9870:9870"  # HDFS Web UI
+      - "8088:8088"  # YARN Resource Manager
+      - "8080:8080"  # Spark Master Web UI
+      - "8020:8020"  # HDFS RPC
+    volumes:
+      - ./config/hadoop:/opt/hadoop/etc/hadoop
+      - ./config/spark:/opt/spark/conf
+      - ./scripts:/scripts
+      - master-data:/data/hdfs
+
+  secondary-master:
+    image: hadoop-spark-cluster
+    hostname: secondary-master
+    command: ["/scripts/start-secondary.sh"]
+    ports:
+      - "50090:50090"  # Secondary NameNode Web
+    volumes:
+      - ./config/hadoop:/opt/hadoop/etc/hadoop
+      - ./config/spark:/opt/spark/conf
+      - ./scripts:/scripts
+      - secondary-data:/data/hdfs
+
+  slave1:
+    image: hadoop-spark-cluster
+    hostname: slave1
+    command: ["/scripts/start-slave.sh"]
+    volumes:
+      - ./config/hadoop:/opt/hadoop/etc/hadoop
+      - ./config/spark:/opt/spark/conf
+      - ./scripts:/scripts
+      - slave1-data:/data/hdfs
+
+  slave2:
+    image: hadoop-spark-cluster
+    hostname: slave2
+    command: ["/scripts/start-slave.sh"]
+    volumes:
+      - ./config/hadoop:/opt/hadoop/etc/hadoop
+      - ./config/spark:/opt/spark/conf
+      - ./scripts:/scripts
+      - slave2-data:/data/hdfs
+
+  slave3:
+    image: hadoop-spark-cluster
+    hostname: slave3
+    command: ["/scripts/start-slave.sh"]
+    volumes:
+      - ./config/hadoop:/opt/hadoop/etc/hadoop
+      - ./config/spark:/opt/spark/conf
+      - ./scripts:/scripts
+      - slave3-data:/data/hdfs
+    
+  mongodb:
+  image: mongo:latest
+  hostname: mongodb
+  ports:
+    - "27017:27017"
+
+volumes:
+  master-data:
+  secondary-data:
+  slave1-data:
+  slave2-data:
+  slave3-data:
