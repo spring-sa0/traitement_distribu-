@@ -52,5 +52,3 @@ Une entreprise fait face à une augmentation significative de ses projets et de 
 - **Contenu** : Démonstrations de l'installation, configuration, exécution des scripts, tests, et visualisation des résultats, avec justifications techniques.
 - **Objectif** : Offrir une présentation complète et pédagogique des choix et résultats.
 
-## Soumission
-Soumettez tous les livrables mentionnés ci-dessus. Date limite : Vendredi 29 août 2025.
